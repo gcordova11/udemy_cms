@@ -103,3 +103,32 @@ function findAllPosts()
 		echo "</tr>";
 	}
 }
+
+function findAllComments()
+{
+	global $connection;
+	$query = "SELECT * FROM comments";
+	$select_comments = mysqli_query($connection, $query);
+	while ($row = mysqli_fetch_assoc($select_comments)) {
+		$comment_author = $row['comment_author'];
+		$comment_id = $row['comment_id'];
+		$comment_post_id = $row['comment_post_id'];
+		$comment_content = $row['comment_content'];
+		$comment_email = $row['comment_email'];
+		$comment_status = $row['comment_status'];
+		$comment_date = $row['comment_date'];
+
+		echo "<tr>";
+		echo "<td>{$comment_id}</td>";
+		echo "<td>{$comment_author}</td>";
+		echo "<td>{$comment_content}</td>";
+		echo "<td>{$comment_email}</td>";
+		echo "<td>{$comment_status}</td>";
+		echo "<td>Some Title</td>";
+		echo "<td>{$comment_date}</td>";
+		echo "<td><a href ='posts.php?source=edit_post&p_id={$comment_id}'>Approve</a></td>";
+		echo "<td><a href ='posts.php?source=edit_post&p_id={$comment_id}'>Unapprove</a></td>";
+		echo "<td><a href ='posts.php?delete={$comment_id}'>DELETE</a></td>";
+		echo "</tr>";
+	}
+}
